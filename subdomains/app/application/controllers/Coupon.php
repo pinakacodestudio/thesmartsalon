@@ -33,6 +33,7 @@ class Coupon extends CI_Controller
         }
         $this->load->view('Coupon/index', $params);
     }
+
     public function save()
     {
         $this->form_validation->set_rules('code', 'Enter Coupon Code', 'required');
@@ -47,8 +48,6 @@ class Coupon extends CI_Controller
             $peruser = StringRepair($data["per_user"]);
             $valid_till = StringRepair($data["validdate"]);
             $description = StringRepair($data["cupdescription"]);
-
-
             $today = date('Y-m-d H:i:s');
             if ($id != 0 and $id != "") {
                 if (!check_role_assigned('coupon', 'edit')) {
@@ -121,7 +120,6 @@ class Coupon extends CI_Controller
         if ($this->Queries->updateRecord(TBL_COUPON, $form_data, $id)) : $this->session->set_flashdata('success_msg', 'Coupon Deleted Successfully');
         else : $this->session->set_flashdata('error_msg', 'Failed To Delete Coupon');
         endif;
-
         return redirect('Coupon');
     }
 }
